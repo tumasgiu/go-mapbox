@@ -3,20 +3,20 @@
  * Wraps the mapbox APIs for golang server (or application) use
  * See https://www.mapbox.com/api-documentation/for API information
  *
- * https://github.com/ryankurte/go-mapbox
+ * https://github.com/tumasgiu/go-mapbox
  * Copyright 2017 Ryan Kurte
  */
 
 package mapbox
 
 import (
-	"github.com/ryankurte/go-mapbox/lib/base"
-	"github.com/ryankurte/go-mapbox/lib/directions"
-	"github.com/ryankurte/go-mapbox/lib/directions_matrix"
-	"github.com/ryankurte/go-mapbox/lib/geocode"
-	"github.com/ryankurte/go-mapbox/lib/map_matching"
-	"github.com/ryankurte/go-mapbox/lib/maps"
-	"github.com/ryankurte/go-mapbox/lib/styles"
+	"github.com/tumasgiu/go-mapbox/lib/base"
+	"github.com/tumasgiu/go-mapbox/lib/directions"
+	"github.com/tumasgiu/go-mapbox/lib/directions_matrix"
+	"github.com/tumasgiu/go-mapbox/lib/geocode"
+	"github.com/tumasgiu/go-mapbox/lib/map_matching"
+	"github.com/tumasgiu/go-mapbox/lib/maps"
+	"github.com/tumasgiu/go-mapbox/lib/styles"
 )
 
 // Mapbox API Wrapper structure

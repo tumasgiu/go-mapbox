@@ -1,8 +1,8 @@
 package styles_test
 
 import (
-	"github.com/ryankurte/go-mapbox/lib/base"
-	. "github.com/ryankurte/go-mapbox/lib/styles"
+	"github.com/tumasgiu/go-mapbox/lib/base"
+	. "github.com/tumasgiu/go-mapbox/lib/styles"
 	"github.com/sirupsen/logrus"
 	"os"
 	"testing"

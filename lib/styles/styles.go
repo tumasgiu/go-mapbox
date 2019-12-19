@@ -5,7 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/google/go-querystring/query"
-	"github.com/ryankurte/go-mapbox/lib/base"
+	"github.com/tumasgiu/go-mapbox/lib/base"
 	"io/ioutil"
 	"net/http"
 	"net/url"

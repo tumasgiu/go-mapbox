@@ -1,6 +1,6 @@
 package styles
 
-import "github.com/ryankurte/go-mapbox/lib/base"
+import "github.com/tumasgiu/go-mapbox/lib/base"
 
 type Anchor string
 
