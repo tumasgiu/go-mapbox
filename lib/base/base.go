@@ -13,6 +13,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"io"
 	"io/ioutil"
 	"net/http"
 	"net/http/httputil"
@@ -54,24 +55,36 @@ type MapboxApiMessage struct {
 	Message string
 }
 
-// QueryRequest make a get with the provided query string and return the response if successful
-func (b *Base) QueryRequest(query string, v *url.Values) (*http.Response, error) {
+// Request make a get with the provided path string and return the response if successful
+func (b *Base) Request(method, path string, query *url.Values, body io.Reader) (*http.Response, error) {
+	q := query
+	if q == nil {
+		q = &url.Values{}
+	}
 	// Add token to args
-	v.Set("access_token", b.token)
+	q.Set("access_token", b.token)
 
 	// Generate URL
-	url := fmt.Sprintf("%s/%s", BaseURL, query)
+	url := fmt.Sprintf("%s/%s", BaseURL, path)
 
 	if b.debug {
 		fmt.Printf("URL: %s\n", url)
 	}
 
 	// Create request object
-	request, err := http.NewRequest(http.MethodGet, url, nil)
+	request, err := http.NewRequest(method, url, body)
 	if err != nil {
 		return nil, err
 	}
-	request.URL.RawQuery = v.Encode()
+
+	switch method {
+	case http.MethodPatch:
+	case http.MethodPut:
+	case http.MethodPost:
+		request.Header.Add("Content-Type", "application/json")
+	}
+
+	request.URL.RawQuery = q.Encode()
 
 	// Create client instance
 	client := &http.Client{}
@@ -102,7 +115,7 @@ func (b *Base) QueryRequest(query string, v *url.Values) (*http.Response, error)
 // TODO: Rename this
 func (b *Base) QueryBase(query string, v *url.Values, inst interface{}) error {
 	// Make request
-	resp, err := b.QueryRequest(query, v)
+	resp, err := b.Request(http.MethodGet, query, v, nil)
 	if err != nil && (resp == nil || resp.StatusCode != http.StatusBadRequest) {
 		return err
 	}

@@ -17,6 +17,7 @@ import (
 	_ "image/png"
 	"io/ioutil"
 	"log"
+	"net/http"
 	"net/url"
 	"strings"
 
@@ -89,7 +90,7 @@ func (m *Maps) GetTile(mapID MapID, x, y, z uint64, format MapFormat, highDPI bo
 	// Create Request
 	queryString := fmt.Sprintf("%s/%s/%d/%d/%d%s.%s", apiVersion, mapID, z, x, y, dpiFlag, format)
 
-	resp, err := m.base.QueryRequest(queryString, &v)
+	resp, err := m.base.Request(http.MethodGet, queryString, &v, nil)
 	if err != nil {
 		return nil, err
 	}

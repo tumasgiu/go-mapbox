@@ -16,6 +16,7 @@ import (
 	"github.com/ryankurte/go-mapbox/lib/geocode"
 	"github.com/ryankurte/go-mapbox/lib/map_matching"
 	"github.com/ryankurte/go-mapbox/lib/maps"
+	"github.com/ryankurte/go-mapbox/lib/styles"
 )
 
 // Mapbox API Wrapper structure
@@ -31,10 +32,11 @@ type Mapbox struct {
 	DirectionsMatrix *directionsmatrix.DirectionsMatrix
 	// MapMatching snaps inaccurate path tracked to a map to produce a clean path
 	MapMatching *mapmatching.MapMatching
+	Styles      *styles.Styles
 }
 
 // NewMapbox Create a new mapbox API instance
-func NewMapbox(token string) (*Mapbox, error) {
+func New(token string) (*Mapbox, error) {
 	m := &Mapbox{}
 
 	// Create base instance
@@ -50,6 +52,7 @@ func NewMapbox(token string) (*Mapbox, error) {
 	m.Directions = directions.NewDirections(m.base)
 	m.DirectionsMatrix = directionsmatrix.NewDirectionsMatrix(m.base)
 	m.MapMatching = mapmatching.NewMapMaptching(m.base)
+	m.Styles = styles.NewStyles(m.base)
 
 	return m, nil
 }
